@@ -1,0 +1,17 @@
+<div class="text-center mt-4 mb-10">
+    <h1 class="text-3xl font-bold uppercase">application todo-list</h1>
+    @if (todoStats$ | async; as stats) {
+    <p class="text-slate-500 mt-4">
+        {{ stats.count === 0 ? 'Aucune tâche' : stats.count + ' tâche' + (stats.count > 1 ? 's' : '') + ' au total' }} |
+        {{ stats.countCompleted === 0 ? '0 tâche finie' : stats.countCompleted + ' tâche' + (stats.countCompleted > 1 ?
+        's' : '') + ' finie' }} |
+        {{ stats.countNotCompleted === 0 ? 'Toutes les tâches sont finies' : stats.countNotCompleted + ' tâche' +
+        (stats.countNotCompleted > 1 ? 's' : '') + ' en cours' }}
+    </p>
+    }
+</div>
+
+<div class="flex flex-col items-center gap-y-4">
+    <app-add-list></app-add-list>
+    <app-todo-list></app-todo-list>
+</div>

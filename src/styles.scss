@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+body {
+    background-color: rgb(242, 242, 242);
+}
+
+/* styles.css */
+@layer components {
+    .hover-scale {
+        @apply hover:scale-105 transition-all duration-300;
+    }
+}

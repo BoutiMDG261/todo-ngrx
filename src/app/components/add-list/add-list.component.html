@@ -1,0 +1,11 @@
+<div class="w-[350px] bg-white">
+    <form class="w-full flex">
+        <input placeholder="Ajouter todo ici..." type="text" class="flex-grow border border-gray-600 rounded-l-sm p-2"
+            [formControl]="todoControl" />
+        <button type="submit"
+            class="border border-blue-600 text-white bg-blue-600 rounded-r-sm p-2 hover:cursor-pointer hover:bg-blue-900"
+            (click)="addTodo($event)">
+            Ajouter
+        </button>
+    </form>
+</div>

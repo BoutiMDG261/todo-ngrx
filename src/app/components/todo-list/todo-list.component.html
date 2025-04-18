@@ -1,0 +1,79 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    @if (todos$ | async; as todos) {
+    @if (todos.length > 0) {
+    @for (todo of todos; track $index) {
+    <div class="bg-white flex items-center justify-between p-4 gap-x-6 rounded-sm shadow-sm"
+        [@todoValidation]="todo.completed">
+        <div class="flex items-center gap-x-2">
+            @if (editingTodoId === todo.id) {
+            <input class="border border-gray-600 rounded-l-sm p-2" type="text" [formControl]="titleControl" />
+            }@else {
+            <span [ngClass]="{ 'line-through': todo.completed }" class="text-lg font-semibold">{{todo.title}}</span>
+            }
+        </div>
+        <div class="flex items-center gap-x-6">
+            @if (todo.completed) {
+            <div class="flex items-center relative group">
+                <ng-icon name="heroHandThumbUp" [size]="'20'"
+                    class="!text-blue-400 hover:cursor-pointer hover:!text-blue-600 hover-scale"></ng-icon>
+                <div
+                    class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black text-white text-sm px-2 py-1 rounded">
+                    Ok
+                </div>
+            </div>
+            } @else {
+            @if (editingTodoId === todo.id) {
+            <div class="flex items-center relative group" (click)="update(todo)">
+                <ng-icon name="heroArrowDownTray" [size]="'20'"
+                    class="!text-blue-400 hover:cursor-pointer hover:!text-blue-600 hover-scale"></ng-icon>
+                <div
+                    class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black text-white text-sm px-2 py-1 rounded">
+                    Enregistrer
+                </div>
+            </div>
+            <div class="flex items-center relative group" (click)="toogleEdit(todo)">
+                <ng-icon name="heroBackspace" [size]="'20'"
+                    class="!text-red-400 hover:cursor-pointer hover:!text-red-600 hover-scale">
+                </ng-icon>
+                <div
+                    class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black text-white text-sm px-2 py-1 rounded">
+                    Annuler
+                </div>
+            </div>
+            }@else{
+            <div class="flex items-center relative group" (click)="delete(todo)">
+                <ng-icon name="heroTrash" [size]="'20'"
+                    class="!text-red-400 hover:cursor-pointer hover:!text-red-600 hover-scale"></ng-icon>
+                <div
+                    class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black text-white text-sm px-2 py-1 rounded">
+                    Supprimer
+                </div>
+            </div>
+            <div class="flex items-center relative group" (click)="toogleEdit(todo)">
+                <ng-icon name="heroPencilSquare" [size]="'20'"
+                    class="!text-yellow-400 hover:cursor-pointer hover:!text-yellow-600 hover-scale">
+                </ng-icon>
+                <div
+                    class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black text-white text-sm px-2 py-1 rounded">
+                    Modifier
+                </div>
+            </div>
+            <div class="flex items-center relative group" (click)="validate(todo)">
+                <ng-icon name="heroPlay" [size]="'20'"
+                    class="!text-green-400 hover:cursor-pointer hover:!text-green-600 hover-scale"></ng-icon>
+                <div
+                    class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black text-white text-sm px-2 py-1 rounded">
+                    Valider
+                </div>
+            </div>
+            }
+            }
+        </div>
+    </div>
+    }
+    }
+    @else {
+    <div>Pas de todo.</div>
+    }
+    }
+</div>
